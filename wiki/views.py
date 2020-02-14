@@ -15,6 +15,9 @@ class PageList(ListView):
 
     def get(self, request):
         """ Returns a list of wiki pages. """
+        wiki_pages = Page.objects.all()
+        context = {'wiki_list': wiki_list}
+        return render(request, 'list.html', context=context)
         pass
 
 
@@ -39,7 +42,8 @@ class PageDetailView(DetailView):
 
     def get(self, request, slug):
         """ Returns a specific of wiki page by slug. """
-        pass
-
-    def post(self, request, slug):
-        pass
+        try:
+          wiki = Page.objects.get(slug=slug)
+        except Page.DoesNotExist:
+          raise Http404("Page does not exist")
+        return render(request, 'page.html', {'wiki': wiki})

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from wiki import views
 
 """
 CHALLENGES:
@@ -27,5 +28,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Wiki App
-    # path('REPLACE_ME_WITH_ROUTE', include(REPLACE_ME_WITH_APP_URLS)),
+    path('', include('wiki.urls'))
 ]
